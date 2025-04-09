@@ -49,4 +49,10 @@ class Post {
       'video': video,
     };
   }
+
+  @override
+  int get hashCode => id.hashCode | runtimeType.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is Post && other.id == id;
 }

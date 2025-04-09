@@ -11,17 +11,14 @@ class VideoManagerBloc extends Bloc<VideoManagerEvent, VideoManagerState> {
     });
     on<RemoveVideoControllerEvent>((event, emit) {
       if (state is VideoManagerWithController) {
-        final controller = (state as VideoManagerWithController).controller;
-        if (event.controller == null || event.controller == controller) {
-          emit(VideoManagerNoController());
-        }
+        emit(VideoManagerNoController());
       }
     });
     on<PauseVideoControllerEvent>((event, emit) {
-      if (state is VideoManagerWithController) {
-        final controller = (state as VideoManagerWithController).controller;
-        controller?.pause();
-      }
+      state.getController?.pause();
+    });
+    on<PlayVideoControllerEvent>((event, emit) {
+      state.getController?.play();
     });
   }
 }

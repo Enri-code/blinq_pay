@@ -9,10 +9,12 @@ class SetVideoControllerEvent extends VideoManagerEvent {
 }
 
 class RemoveVideoControllerEvent extends VideoManagerEvent {
-  final VideoPlayerController? controller;
-  RemoveVideoControllerEvent({this.controller});
+  RemoveVideoControllerEvent();
 }
 
 class PauseVideoControllerEvent extends VideoManagerEvent {
   PauseVideoControllerEvent();
+}
+class PlayVideoControllerEvent extends VideoManagerEvent {
+  PlayVideoControllerEvent();
 }

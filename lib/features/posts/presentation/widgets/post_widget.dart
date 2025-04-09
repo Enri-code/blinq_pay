@@ -4,7 +4,8 @@ import 'package:blinq_pay/core/utils/helper_functions.dart';
 import 'package:blinq_pay/features/home/presentation/pages/photo_view_page.dart';
 import 'package:blinq_pay/features/home/presentation/widgets/video_player_widget.dart';
 import 'package:blinq_pay/features/posts/domain/models/post.dart';
-import 'package:blinq_pay/features/users/presentation/widgets/user_status.dart';
+import 'package:blinq_pay/features/users/presentation/widgets/user_profile.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bounce/bounce.dart';
@@ -20,17 +21,16 @@ class PostWidget extends StatelessWidget {
       children: [
         _PostHeader(post: post),
         if (post.description.isNotEmpty) ...[
-          4.verticalSpace,
+          6.verticalSpace,
           Text(
             post.description,
             style: Theme.of(context).textTheme.bodyMedium,
-            // textAlign: TextAlign.justify,
           ),
         ],
         if (!post.noMedia) ...[
-          4.verticalSpace,
+          6.verticalSpace,
           AspectRatio(
-            aspectRatio: 4 / 3,
+            aspectRatio: 1,
             child: Bounce(
               scaleFactor: .98,
               tiltAngle: pi / 20,
@@ -38,14 +38,15 @@ class PostWidget extends StatelessWidget {
               child: Card(
                 elevation: 4,
                 clipBehavior: Clip.hardEdge,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
-                    color: Theme.of(context).primaryColor,
-                    width: 1,
+                    color: Theme.of(context).dividerColor,
+                    // width: 2,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                 ),
-                child: Hero(tag: post.link!, child: _PostContent(post: post)),
+                child: Hero(tag: post.id, child: _PostContent(post: post)),
               ),
             ),
           ),
@@ -55,9 +56,50 @@ class PostWidget extends StatelessWidget {
   }
 }
 
+class _PostHeader extends StatelessWidget {
+  const _PostHeader({required this.post});
+
+  final Post post;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        UserProfileWidget(user: post.user, radius: 20.r),
+        8.horizontalSpace,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    post.user.name,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  Spacer(),
+                  Text(
+                    timeago.format(post.timestamp),
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+              Text(
+                '@${post.username}',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _PostContent extends StatelessWidget {
   const _PostContent({required this.post});
-
   final Post post;
 
   @override
@@ -73,64 +115,24 @@ class _PostContent extends StatelessWidget {
             //   ),
             // ));
           },
-          child: VideoPlayerWidget(
-            videoUrl: post.link!,
-            thumbnail: post.thumbnail!,
-          ),
+          child: VideoPlayerWidget(post: post),
         );
       } else {
         return GestureDetector(
           onTap: () {
             Navigator.of(context).push(pageRouteWrapper(
-              PhotoViewPage(url: post.link!),
+              PhotoViewPage(url: post.link!, tag: post.id),
             ));
           },
-          child: Image.network(
+          child: CachedNetworkImage(
+            imageUrl: post.thumbnail!,
             fit: BoxFit.cover,
-            post.thumbnail!,
+            // frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+            //   return ColoredBox(color: Theme.of(context).primaryColor);
+            // },
           ),
         );
       }
     });
-  }
-}
-
-class _PostHeader extends StatelessWidget {
-  const _PostHeader({required this.post});
-
-  final Post post;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        UserProfileWidget(user: post.user),
-        8.horizontalSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    post.user.name,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  Spacer(),
-                  Text(
-                    timeago.format(post.timestamp),
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ),
-              Text(
-                post.username,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }

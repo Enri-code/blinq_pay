@@ -1,5 +1,6 @@
 import 'package:blinq_pay/core/constants/generated_image.dart';
 import 'package:blinq_pay/features/posts/presentation/pages/posts_tab.dart';
+import 'package:blinq_pay/features/users/presentation/pages/users_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -24,17 +25,18 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       body: PersistentTabView(
         context,
-        // bottomScreenMargin: 0,
         navBarStyle: NavBarStyle.style13,
         navBarHeight: 48,
         stateManagement: false,
         handleAndroidBackButtonPress: false,
-
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         margin: EdgeInsets.symmetric(horizontal: .2.sw, vertical: 20),
         decoration: NavBarDecoration(
+          border: Border.all(
+            color: Theme.of(context).dividerColor,
+            width: 1,
+          ),
           borderRadius: BorderRadius.circular(16),
-          // colorBehindNavBar: Theme.of(context).scaffoldBackgroundColor,
           boxShadow: [
             BoxShadow(
               blurRadius: 8,
@@ -55,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen>
             title: 'Users',
           ),
         ],
-        screens: [PostsTab(), PostsTab()],
+        screens: [PostsTab(), UsersTab()],
       ),
     );
   }
