@@ -24,11 +24,11 @@ class PostWidget extends StatelessWidget {
           Text(
             post.description,
             style: Theme.of(context).textTheme.bodyMedium,
-            textAlign: TextAlign.justify,
+            // textAlign: TextAlign.justify,
           ),
         ],
         if (!post.noMedia) ...[
-          6.verticalSpace,
+          4.verticalSpace,
           AspectRatio(
             aspectRatio: 4 / 3,
             child: Bounce(
@@ -40,8 +40,8 @@ class PostWidget extends StatelessWidget {
                 clipBehavior: Clip.hardEdge,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
-                    color: Theme.of(context).dividerColor,
-                    width: 3,
+                    color: Theme.of(context).primaryColor,
+                    width: 1,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                 ),

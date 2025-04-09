@@ -39,8 +39,7 @@ dependencies:
   animated_theme_switcher: ^2.0.10
   bounce: ^1.0.2
 
-  floating_bottom_navigation_bar: ^1.5.2
-  google_nav_bar: ^5.0.7
+  persistent_bottom_nav_bar: ^6.2.1
 
   flutter_svg: ^2.0.17
   flutter_screenutil: ^5.9.3

@@ -1,8 +1,8 @@
 import 'package:blinq_pay/core/constants/generated_image.dart';
 import 'package:blinq_pay/features/posts/presentation/pages/posts_tab.dart';
-import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,9 +11,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final pageController = PageController();
-
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -21,48 +20,42 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: pageController,
-        children: [PostsTab(), PostsTab()],
-      ),
-      bottomNavigationBar: ListenableBuilder(
-        listenable: pageController,
-        builder: (context, child) {
-          return FloatingNavbar(
-            // unselectedItemColor: Theme.of(context).disabledColor,
-            // selectedItemColor: Theme.of(context).primaryColor,
-            width: 1.sw,
-            margin: EdgeInsets.zero,
-            currentIndex:
-                pageController.hasClients ? pageController.page?.round() : 0,
-            onTap: (index) {
-              pageController.animateToPage(
-                index,
-                duration: Durations.medium2,
-                curve: Curves.easeOut,
-              );
-            },
-            items: [
-              FloatingNavbarItem(
-                title: 'Home',
-                icon: Icons.comment_bank_outlined,
-              ),
-              FloatingNavbarItem(
-                title: 'Users',
-                icon: Icons.groups,
-              ),
-            ],
-          );
-        },
+      body: PersistentTabView(
+        context,
+        // bottomScreenMargin: 0,
+        navBarStyle: NavBarStyle.style13,
+        navBarHeight: 48,
+        stateManagement: false,
+        handleAndroidBackButtonPress: false,
+
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        margin: EdgeInsets.symmetric(horizontal: .2.sw, vertical: 20),
+        decoration: NavBarDecoration(
+          borderRadius: BorderRadius.circular(16),
+          // colorBehindNavBar: Theme.of(context).scaffoldBackgroundColor,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 8,
+              color: Theme.of(context).shadowColor,
+              offset: const Offset(0, 0),
+            ),
+          ],
+        ),
+        items: [
+          PersistentBottomNavBarItem(
+            activeColorPrimary: Theme.of(context).tabBarTheme.labelColor!,
+            icon: Icon(Icons.comment_bank_outlined),
+            title: 'Posts',
+          ),
+          PersistentBottomNavBarItem(
+            activeColorPrimary: Theme.of(context).tabBarTheme.labelColor!,
+            icon: Icon(Icons.groups),
+            title: 'Users',
+          ),
+        ],
+        screens: [PostsTab(), PostsTab()],
       ),
     );
   }
