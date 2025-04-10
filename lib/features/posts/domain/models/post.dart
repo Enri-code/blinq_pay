@@ -1,39 +1,35 @@
 import 'package:blinq_pay/features/users/domain/models/user.dart';
 
-class Post {
+class PostData {
   final String id, userId, username;
   final String description;
-  final String? thumbnail, link;
-  final DateTime timestamp;
+  final String thumbnail, link;
   final bool noMedia, video;
 
-  final User user;
-
-  Post({
+  PostData({
     required this.id,
     required this.userId,
     required this.description,
     required this.username,
-    required this.thumbnail,
-    required this.link,
-    required this.timestamp,
+    this.thumbnail = '',
+    this.link = '',
     required this.noMedia,
     required this.video,
-    required this.user,
   });
 
   /// Creates a Post object from JSON data.
-  Post.fromJson(Map<String, dynamic> json)
-      : id = json['id'] as String,
-        userId = json['userId'] as String,
-        username = json['username'] as String,
-        description = json['description'] as String,
-        thumbnail = json['thumbnail'] as String?,
-        link = json['link'] as String?,
-        timestamp = DateTime.parse(json['timestamp']),
-        noMedia = json['no_media'] ?? false,
-        video = json['video'] ?? false,
-        user = User.fromJson(json['user']);
+  factory PostData.fromJson(Map<String, dynamic> json) {
+    return PostData(
+      id: json['id'] as String,
+      userId: json['userId'] as String,
+      description: json['description'] as String,
+      username: json['username'] as String,
+      thumbnail: json['thumbnail'] as String? ?? '',
+      link: json['link'] as String? ?? '',
+      noMedia: json['no_media'] ?? false,
+      video: json['video'] ?? false,
+    );
+  }
 
   /// Converts the Post object to JSON format.
   Map<String, dynamic> toJson() {
@@ -44,7 +40,6 @@ class Post {
       'username': username,
       'thumbnail': thumbnail,
       'link': link,
-      'timestamp': timestamp.toIso8601String(),
       'no_media': noMedia,
       'video': video,
     };
@@ -54,5 +49,57 @@ class Post {
   int get hashCode => id.hashCode | runtimeType.hashCode;
 
   @override
-  bool operator ==(Object other) => other is Post && other.id == id;
+  bool operator ==(Object other) => other is PostData && other.id == id;
+}
+
+class Post extends PostData {
+  Post({
+    required super.id,
+    required super.userId,
+    required super.description,
+    required super.username,
+    super.thumbnail,
+    super.link,
+    required this.timestamp,
+    required super.noMedia,
+    required super.video,
+    required this.user,
+  });
+
+  final DateTime timestamp;
+  final User user;
+
+  /// Creates a Post object from JSON data.
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      id: json['id'] as String,
+      userId: json['userId'] as String,
+      description: json['description'] as String,
+      username: json['username'] as String,
+      thumbnail: json['thumbnail'] as String? ?? '',
+      link: json['link'] as String? ?? '',
+      timestamp: DateTime.parse(json['timestamp']),
+      noMedia: json['no_media'] ?? false,
+      video: json['video'] ?? false,
+      user: User.fromJson(json['user']),
+    );
+  }
+
+  /// Converts the Post object to JSON format.
+  @override
+  Map<String, dynamic> toJson() {
+    final data = super.toJson()
+      ..addAll({
+        'user': user.toJson(),
+        'timestamp': timestamp.toIso8601String(),
+      });
+    return data;
+  }
+
+  @override
+  int get hashCode => super.hashCode | user.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      other is Post && other.id == id && other.user == user;
 }

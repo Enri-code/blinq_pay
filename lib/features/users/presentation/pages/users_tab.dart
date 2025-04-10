@@ -1,11 +1,28 @@
+import 'package:blinq_pay/core/utils/extensions/data_state.dart';
 import 'package:blinq_pay/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
+import 'package:blinq_pay/features/users/presentation/bloc/users_bloc/users_bloc.dart';
 import 'package:blinq_pay/features/users/presentation/widgets/user_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
-class UsersTab extends StatelessWidget {
+class UsersTab extends StatefulWidget {
   const UsersTab({super.key});
+
+  @override
+  State<UsersTab> createState() => _UsersTabState();
+}
+
+class _UsersTabState extends State<UsersTab> {
+  @override
+  void initState() {
+    if (context.read<UsersBloc>().state is! FoundUsersState) {
+      context.read<UsersBloc>().add(GetUsersEvent());
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +45,7 @@ class UsersTab extends StatelessWidget {
                       hintText: 'Search',
                       prefixIcon: const Icon(Icons.search),
                     ),
+                    onTapOutside: (event) => FocusScope.of(context).unfocus(),
                     onChanged: (value) {},
                   ),
                 ),
@@ -36,19 +54,71 @@ class UsersTab extends StatelessWidget {
           ),
           SliverPadding(
             padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 16.h),
-            sliver: SliverList.separated(
-              itemBuilder: (context, index) {
-                final user = User(
-                  userId: 'userId',
-                  username: 'username',
-                  name: 'Full Name',
-                  bio: 'bio',
-                  photo:
-                      'https://cdn.dribbble.com/users/14790058/avatars/normal/2283a992ab80bcd500f7b950ba865cf1.jpg?1699074419',
+            sliver: BlocBuilder<UsersBloc, UsersState>(
+              builder: (context, state) {
+                if (state.dataState?.isError == true && false) {
+                  return SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: Text(
+                        state.dataState?.error?.message ?? '',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  );
+                }
+                if (state is NoUsersState && false) {
+                  return SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: Text(
+                        'No users found',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  );
+                }
+                if (state is FoundUsersState) {
+                  return SliverList.separated(
+                    itemCount: state.data.data.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == state.data.data.length) {
+                        return const SizedBox(
+                          height: 100,
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                      final user = state.data.data[index];
+                      return UserTileWidget(user: user);
+                    },
+                    separatorBuilder: (context, index) => 16.verticalSpace,
+                  );
+                }
+
+                return SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final user = User(
+                          userId: '',
+                          username: 'username',
+                          name: 'User Name',
+                          bio: '',
+                          photo: '',
+                        );
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 16.h),
+                          child: UserTileWidget(user: user),
+                        );
+                      },
+                    ),
+                  ),
                 );
-                return UserTileWidget(user: user);
               },
-              separatorBuilder: (context, index) => 16.verticalSpace,
             ),
           ),
         ],
