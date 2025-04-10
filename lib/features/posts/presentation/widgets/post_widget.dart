@@ -106,27 +106,18 @@ class _PostContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       if (post.video) {
-        return GestureDetector(
-          onTap: () {
-            // Navigator.of(context).push(pageRouteWrapper(
-            //   VideoPlayerPage(
-            //     videoUrl: post.link!,
-            //     thumbnail: post.thumbnail!,
-            //   ),
-            // ));
-          },
-          child: VideoPlayerWidget(post: post),
-        );
+        return VideoPlayerWidget(post: post);
       } else {
         return GestureDetector(
           onTap: () {
             Navigator.of(context).push(pageRouteWrapper(
-              PhotoViewPage(url: post.link!, tag: post.id),
+              PhotoViewPage(url: post.link, tag: post.id),
             ));
           },
           child: CachedNetworkImage(
-            imageUrl: post.thumbnail!,
+            imageUrl: post.thumbnail,
             fit: BoxFit.cover,
+            errorWidget: (context, error, stackTrace) => SizedBox(),
             // frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
             //   return ColoredBox(color: Theme.of(context).primaryColor);
             // },
