@@ -1,4 +1,4 @@
-import 'package:blinq_pay/features/home/presentation/widgets/app_bar.dart';
+import 'package:blinq_pay/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
 import 'package:blinq_pay/features/users/presentation/widgets/user_tile.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +23,12 @@ class UsersTab extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(16.w),
                   child: TextField(
+                    textInputAction: TextInputAction.search,
                     decoration: InputDecoration(
                       hintText: 'Search',
                       prefixIcon: const Icon(Icons.search),
                     ),
-                    textInputAction: TextInputAction.search,
+                    onChanged: (value) {},
                   ),
                 ),
               ),

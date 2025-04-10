@@ -11,6 +11,7 @@ class PhotoViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: PhotoView(
         imageProvider: CachedNetworkImageProvider(url),
         heroAttributes: PhotoViewHeroAttributes(tag: tag),

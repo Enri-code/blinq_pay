@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:blinq_pay/features/home/presentation/widgets/app_bar.dart';
+import 'package:blinq_pay/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:blinq_pay/features/posts/domain/models/post.dart';
 import 'package:blinq_pay/features/posts/presentation/widgets/post_widget.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
