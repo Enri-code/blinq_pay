@@ -1,4 +1,3 @@
-
 import 'package:blinq_pay/core/utils/extensions/string.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +15,7 @@ class UserProfileWidget extends StatelessWidget {
       radius: radius ?? 20.r,
       foregroundImage: NetworkImage(user.photo),
       backgroundColor: Theme.of(context).cardColor,
+      onForegroundImageError: (exception, stackTrace) {},
       child: Text(
         user.name.initials,
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(

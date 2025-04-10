@@ -11,11 +11,11 @@ final darkTheme = ThemeData.dark().copyWith(
   primaryColorLight: const Color(0xFFEB7E3D),
   primaryColorDark: const Color(0xFF7E41D6),
   primaryColor: Colors.white,
-  tabBarTheme: const TabBarTheme(labelColor: Color(0xFFEB7E3D)),
+  tabBarTheme: const TabBarTheme(labelColor: Color(0xffffffff)),
   // scaffoldBackgroundColor: Color(0xFF121212),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: ThemeData.dark().cardColor,
+    fillColor: ThemeData.dark().scaffoldBackgroundColor,
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.r),
       borderSide: BorderSide(color: ThemeData.dark().dividerColor),

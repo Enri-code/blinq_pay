@@ -11,7 +11,10 @@ class PhotoViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+      ),
       body: PhotoView(
         imageProvider: CachedNetworkImageProvider(url),
         heroAttributes: PhotoViewHeroAttributes(tag: tag),

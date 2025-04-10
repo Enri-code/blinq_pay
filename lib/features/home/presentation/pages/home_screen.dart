@@ -1,24 +1,11 @@
-import 'package:blinq_pay/core/constants/generated_image.dart';
 import 'package:blinq_pay/features/posts/presentation/pages/posts_tab.dart';
 import 'package:blinq_pay/features/users/presentation/pages/users_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    myPrecacheImage(context);
-  }
 
   @override
   Widget build(BuildContext context) {
