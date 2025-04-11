@@ -1,8 +1,8 @@
 part of 'users_bloc.dart';
 
 sealed class UsersState extends Equatable {
-  final DataState? dataState;
-  const UsersState({this.dataState});
+  final DataState dataState;
+  const UsersState({this.dataState = const DataState()});
 
   @override
   List<Object?> get props => [dataState];

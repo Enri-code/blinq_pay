@@ -30,14 +30,14 @@ class UsersDatasourceFS extends UsersDatasource {
 
       usersSnap = await coll.limit(15).get();
     } catch (e) {
-      throw Failure('Error fetching users');
+      throw Failure('There was a problem fetching users');
     }
 
     List<User>? users;
     try {
       users = usersSnap.docs.map((e) => User.fromJson(e.data())).toList();
     } catch (e) {
-      throw Failure('Error loading users');
+      throw Failure('There was a problem loading users');
     }
     return users;
   }

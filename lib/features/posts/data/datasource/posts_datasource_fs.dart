@@ -58,7 +58,7 @@ class PostsDatasourceFS extends PostsDatasource {
       }
       postsSnap = await coll.limit(15).get();
     } catch (e) {
-      throw Failure('Error fetching posts');
+      throw Failure('There was a problem fetching posts');
     }
 
     // Parse posts data.
@@ -67,7 +67,7 @@ class PostsDatasourceFS extends PostsDatasource {
     try {
       posts = postsData.map((e) => PostData.fromJson(e)).toList();
     } catch (e) {
-      throw Failure('Error loading posts');
+      throw Failure('There was a problem loading posts');
     }
 
     QuerySnapshot<Map<String, dynamic>>? usersSnap;
