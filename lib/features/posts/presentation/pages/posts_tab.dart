@@ -157,7 +157,7 @@ class _ScrollBodyWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 if (index == state.data.data.length) {
                   context.read<PostsBloc>().add(GetMorePostsEvent());
-                  return const SizedBox(
+                  return SizedBox(
                     height: 120,
                     child: Align(
                       alignment: Alignment(0, -.75),

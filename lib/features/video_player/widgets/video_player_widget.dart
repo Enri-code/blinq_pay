@@ -1,4 +1,3 @@
-
 import 'package:blinq_pay/features/posts/domain/models/post.dart';
 import 'package:blinq_pay/features/video_player/bloc/video_manager_bloc.dart';
 import 'package:chewie/chewie.dart';
@@ -33,7 +32,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
-      // aspectRatio: 1,
+      aspectRatio: 1,
       autoPlay: true,
       autoInitialize: true,
       looping: true,
@@ -51,55 +50,25 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      alignment: Alignment.center,
-      children: [
-        VisibilityDetector(
-          key: ValueKey(widget.post),
-          onVisibilityChanged: _onVisibilityChanged,
-          child: BlocListener<VideoManagerBloc, VideoManagerState>(
-            listenWhen: (p, c) {
-              return _info != null && c is VideoManagerNoController;
-            },
-            listener: (context, state) {
-              if (_info!.visibleFraction == 1) _play();
-            },
-            child: FittedBox(
-              fit: BoxFit.cover,
-              child: SizedBox(
-                width: 1.sw,
-                height: (1 / videoPlayerController.value.aspectRatio).sw,
-                child: Chewie(controller: chewieController),
-              ),
-            ),
-          ),
-        ),
-        // Center(
-        //   child: IconTheme(
-        //     data: Theme.of(context).iconTheme.copyWith(
-        //           color: Theme.of(context).appBarTheme.backgroundColor,
-        //           size: 48.sp,
-        //         ),
-        //     child: ValueListenableBuilder(
-        //       valueListenable: videoPlayerController,
-        //       builder: (context, _, __) {
-        //         // if (videoPlayerController.value.hasError) {
-        //         //   return Icon(Icons.videocam_off_outlined);
-        //         // }
-        //         // if (videoPlayerController.value.isBuffering ||
-        //         //     !videoPlayerController.value.isInitialized) {
-        //         //   return CircularProgressIndicator(color: Colors.white);
-        //         // }
-        //         // if (!videoPlayerController.value.isPlaying) {
-        //         //   return Icon(Icons.play_arrow_rounded);
-        //         // }
-        //         return SizedBox();
-        //       },
-        //     ),
-        //   ),
+    return VisibilityDetector(
+      key: ValueKey(widget.post),
+      onVisibilityChanged: _onVisibilityChanged,
+      child: BlocListener<VideoManagerBloc, VideoManagerState>(
+        listenWhen: (p, c) {
+          return _info != null && c is VideoManagerNoController;
+        },
+        listener: (context, state) {
+          if (_info!.visibleFraction == 1) _play();
+        },
+        // child: FittedBox(
+        //   fit: BoxFit.cover,
+        //   child: SizedBox(
+        //     width: 1.sw,
+        //     height: (1 / videoPlayerController.value.aspectRatio).sw,
+        child: Chewie(controller: chewieController),
         // ),
-      ],
+        // ),
+      ),
     );
   }
 
