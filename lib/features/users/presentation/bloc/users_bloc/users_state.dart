@@ -1,8 +1,11 @@
 part of 'users_bloc.dart';
 
-sealed class UsersState {
+sealed class UsersState extends Equatable {
   final DataState? dataState;
   const UsersState({this.dataState});
+
+  @override
+  List<Object?> get props => [dataState];
 }
 
 final class UsersInitialState extends UsersState {
@@ -12,6 +15,9 @@ final class UsersInitialState extends UsersState {
 final class FoundUsersState extends UsersState {
   final PaginationData<User> data;
   const FoundUsersState({required this.data, super.dataState});
+
+  @override
+  List<Object?> get props => [data, dataState];
 }
 
 final class NoUsersState extends UsersState {

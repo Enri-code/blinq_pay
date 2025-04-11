@@ -8,7 +8,7 @@ class UsersRepositoryImpl {
   final UsersDatasource datasource;
 
   FutureEitherFailureOr<List<User>> getUsers({
-    int page = 0,
+    int page = 1,
     required UsersDatasourceParam param,
   }) async {
     try {

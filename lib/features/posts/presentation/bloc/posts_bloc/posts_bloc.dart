@@ -2,6 +2,7 @@ import 'package:blinq_pay/core/utils/data_helpers.dart';
 import 'package:blinq_pay/features/posts/data/datasource/posts_datasource_fs.dart';
 import 'package:blinq_pay/features/posts/data/repository/posts_repository.dart';
 import 'package:blinq_pay/features/posts/domain/models/post.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'posts_event.dart';
@@ -15,7 +16,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       emit(PostsInitialState(dataState: DataState(status: Status.loading)));
 
       final posts = await repo.getPosts(
-        page: 0,
+        page: 1,
         param: FSGetPostsDatasourceParams(),
       );
 
@@ -26,6 +27,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       }, (right) {
         emit(FoundPostsState(
           data: PaginationData(
+            page: 1,
             data: right,
             hasNextPage: right.length == 15,
           ),

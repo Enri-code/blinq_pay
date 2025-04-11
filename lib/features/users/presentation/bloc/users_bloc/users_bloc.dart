@@ -2,6 +2,7 @@ import 'package:blinq_pay/core/utils/data_helpers.dart';
 import 'package:blinq_pay/features/users/data/datasource/users_datasource_fs.dart';
 import 'package:blinq_pay/features/users/data/repository/users_repository.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'users_event.dart';
@@ -15,7 +16,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
       emit(UsersInitialState(dataState: DataState(status: Status.loading)));
      
       final posts = await repo.getUsers(
-        page: 0,
+        page: 1,
         param: FSGetUsersDatasourceParams(),
       );
 
@@ -26,6 +27,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
       }, (right) {
         emit(FoundUsersState(
           data: PaginationData(
+            page: 1,
             data: right,
             hasNextPage: right.length == 15,
           ),

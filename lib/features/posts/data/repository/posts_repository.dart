@@ -8,7 +8,7 @@ class PostsRepositoryImpl {
   final PostsDatasource datasource;
 
   FutureEitherFailureOr<List<Post>> getPosts({
-    int page = 0,
+    int page = 1,
     required PostsDatasourceParam param,
   }) async {
     try {

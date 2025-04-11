@@ -22,7 +22,8 @@ class FSGetPostsDatasourceParams extends PostsDatasourceParam {
 }
 
 class PostsDatasourceFS extends PostsDatasource {
-  final db = FirebaseFirestore.instance;
+  final FirebaseFirestore firestore;
+  PostsDatasourceFS(this.firestore);
 
   ///[PostsDatasourceParam] must be a [FSGetPostsDatasourceParams]
   @override
@@ -51,7 +52,7 @@ class PostsDatasourceFS extends PostsDatasource {
 
     try {
       // Query posts collection, ordered by 'id', with optional pagination.
-      var coll = db.collection('posts').orderBy('id');
+      var coll = firestore.collection('posts').orderBy('id');
       if ((param as FSGetPostsDatasourceParams).lastDocId != null) {
         coll = coll.startAfter([param.lastDocId]);
       }
@@ -72,7 +73,7 @@ class PostsDatasourceFS extends PostsDatasource {
     QuerySnapshot<Map<String, dynamic>>? usersSnap;
     try {
       // Fetch user data for the posts.
-      usersSnap = await db
+      usersSnap = await firestore
           .collection('users')
           .where('username', whereIn: posts.map((e) => e.username).toSet())
           .get();

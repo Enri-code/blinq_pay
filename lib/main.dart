@@ -9,6 +9,7 @@ import 'package:blinq_pay/features/users/data/datasource/users_datasource_fs.dar
 import 'package:blinq_pay/features/users/data/repository/users_repository.dart';
 import 'package:blinq_pay/features/users/domain/datasource/users_datasource.dart';
 import 'package:blinq_pay/features/users/presentation/bloc/users_bloc/users_bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,10 +30,10 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<UsersDatasource>(
-          create: (context) => UsersDatasourceFS(),
+          create: (context) => UsersDatasourceFS(FirebaseFirestore.instance),
         ),
         RepositoryProvider<PostsDatasource>(
-          create: (context) => PostsDatasourceFS(),
+          create: (context) => PostsDatasourceFS(FirebaseFirestore.instance),
         ),
       ],
       child: MultiRepositoryProvider(

@@ -10,7 +10,8 @@ class FSGetUsersDatasourceParams extends UsersDatasourceParam {
 }
 
 class UsersDatasourceFS extends UsersDatasource {
-  final db = FirebaseFirestore.instance;
+  final FirebaseFirestore firestore;
+  UsersDatasourceFS(this.firestore);
 
   ///[UsersDatasourceFS] must be a [FSGetUsersDatasourceParams]
   @override
@@ -22,7 +23,7 @@ class UsersDatasourceFS extends UsersDatasource {
   }) async {
     QuerySnapshot<Map<String, dynamic>>? usersSnap;
     try {
-      var coll = db.collection('posts').orderBy('id');
+      var coll = firestore.collection('posts').orderBy('id');
       if ((param as FSGetUsersDatasourceParams).lastDocId != null) {
         coll = coll.startAfter([param.lastDocId]);
       }
