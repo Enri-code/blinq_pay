@@ -1,4 +1,3 @@
-import 'package:better_player/better_player.dart';
 import 'package:blinq_pay/features/posts/domain/models/post.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +23,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         autoPlay: true,
         aspectRatio: 1,
         fit: BoxFit.cover,
-        // showPlaceholderUntilPlay: true,
-        placeholder: CachedNetworkImage(
-          imageUrl: widget.post.thumbnail,
-          fit: BoxFit.cover,
-          errorWidget: (context, error, stackTrace) => SizedBox(),
-        ),
+        // useRootNavigator: true,
+        // placeholder: CachedNetworkImage(
+        //   imageUrl: widget.post.thumbnail,
+        //   fit: BoxFit.cover,
+        //   errorWidget: (context, error, stackTrace) => SizedBox(),
+        // ),
         deviceOrientationsOnFullScreen: DeviceOrientation.values,
         controlsConfiguration: BetterPlayerControlsConfiguration(
           enableOverflowMenu: false,
@@ -37,9 +36,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       ),
       betterPlayerDataSource: BetterPlayerDataSource.network(
         widget.post.link,
+        // headers: {'Content-Type': 'video/mp4'},
         cacheConfiguration: BetterPlayerCacheConfiguration(
           useCache: true,
-          // key: widget.post.link!,
         ),
         notificationConfiguration: BetterPlayerNotificationConfiguration(
           showNotification: true,

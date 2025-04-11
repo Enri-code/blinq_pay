@@ -36,14 +36,16 @@ class PostWidget extends StatelessWidget {
               tiltAngle: pi / 20,
               duration: Durations.short4,
               child: Card(
-                elevation: 4,
+                elevation: 8,
                 clipBehavior: Clip.hardEdge,
                 color: Theme.of(context).scaffoldBackgroundColor,
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: Theme.of(context).dividerColor,
-                    // width: 2,
-                  ),
+                  side: post.video
+                      ? BorderSide(
+                          color: Theme.of(context).primaryColor.withAlpha(150),
+                          width: 4,
+                        )
+                      : BorderSide.none,
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                 ),
                 child: Hero(tag: post.id, child: _PostContent(post: post)),

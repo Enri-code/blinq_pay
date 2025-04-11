@@ -41,6 +41,7 @@ dependencies:
 
   animated_theme_switcher: ^2.0.10
   bounce: ^1.0.2
+  chewie: ^1.11.1   
   cached_network_image: ^3.4.1
   flutter_svg: ^2.0.17
   flutter_screenutil: ^5.9.3
@@ -50,9 +51,6 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   shimmer: ^3.0.0
   timeago: ^3.7.0
-  
-  better_player:
-    path: packages/better_player-0.0.84  
 
 dev_dependencies:
   flutter_test:

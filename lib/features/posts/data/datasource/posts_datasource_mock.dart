@@ -34,7 +34,7 @@ class MockPostsDatasource extends PostsDatasource {
             : 'https://cdn.dribbble.com/userupload/8282521/file/original-26d484aaa28576dafce6b1f7dc0b2bf7.png?resize=752x&vertical=center',
         video: index % 2 == 0,
         link: index % 2 == 0
-            ? 'https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_30mb.mp4'
+            ? 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
             : 'https://cdn.dribbble.com/userupload/8282521/file/original-26d484aaa28576dafce6b1f7dc0b2bf7.png?resize=752x&vertical=center',
         timestamp: DateTime.now().subtract(Duration(minutes: index * index)),
         noMedia: index % 3 == 2,

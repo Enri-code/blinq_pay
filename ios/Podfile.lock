@@ -1188,7 +1188,7 @@ PODS:
     - abseil/meta/type_traits
     - abseil/xcprivacy
   - abseil/xcprivacy (1.20240722.0)
-  - better_player (0.0.1):
+  - better_player_plus (1.0.0):
     - Cache (~> 6.0.0)
     - Flutter
     - GCDWebServer
@@ -1376,7 +1376,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - better_player (from `.symlinks/plugins/better_player/ios`)
+  - better_player_plus (from `.symlinks/plugins/better_player_plus/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
@@ -1409,8 +1409,8 @@ SPEC REPOS:
     - PINOperation
 
 EXTERNAL SOURCES:
-  better_player:
-    :path: ".symlinks/plugins/better_player/ios"
+  better_player_plus:
+    :path: ".symlinks/plugins/better_player_plus/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   firebase_core:
@@ -1428,7 +1428,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
-  better_player: 472a1f3471b8991bde82327c91498b0f7934245d
+  better_player_plus: 10794c0ed1b3b4ae058939e22a6172f850a2039b
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   cloud_firestore: 07742f115155e19201e77b4cafb155011892d7b7
