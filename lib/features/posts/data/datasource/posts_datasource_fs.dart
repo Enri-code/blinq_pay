@@ -21,9 +21,9 @@ class FSGetPostsDatasourceParams extends PostsDatasourceParam {
   FSGetPostsDatasourceParams({this.lastDocId});
 }
 
-class PostsDatasourceFS extends PostsDatasource {
+class FSPostsDatasource extends PostsDatasource {
   final FirebaseFirestore firestore;
-  PostsDatasourceFS(this.firestore);
+  FSPostsDatasource(this.firestore);
 
   ///[PostsDatasourceParam] must be a [FSGetPostsDatasourceParams]
   @override

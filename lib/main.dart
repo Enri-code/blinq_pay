@@ -1,15 +1,14 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:blinq_pay/core/theme/app_theme.dart';
 import 'package:blinq_pay/features/home/presentation/pages/home_screen.dart';
-import 'package:blinq_pay/features/posts/data/datasource/posts_datasource_fs.dart';
+import 'package:blinq_pay/features/posts/data/datasource/posts_datasource_mock.dart';
 import 'package:blinq_pay/features/posts/data/repository/posts_repository.dart';
 import 'package:blinq_pay/features/posts/domain/datasource/posts_datasource.dart';
 import 'package:blinq_pay/features/posts/presentation/bloc/posts_bloc/posts_bloc.dart';
-import 'package:blinq_pay/features/users/data/datasource/users_datasource_fs.dart';
+import 'package:blinq_pay/features/users/data/datasource/users_datasource_mock.dart';
 import 'package:blinq_pay/features/users/data/repository/users_repository.dart';
 import 'package:blinq_pay/features/users/domain/datasource/users_datasource.dart';
 import 'package:blinq_pay/features/users/presentation/bloc/users_bloc/users_bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,10 +29,12 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<UsersDatasource>(
-          create: (context) => UsersDatasourceFS(FirebaseFirestore.instance),
+          create: (context) => MockUsersDatasource(),
+          // create: (context) => FSUsersDatasource(FirebaseFirestore.instance),
         ),
         RepositoryProvider<PostsDatasource>(
-          create: (context) => PostsDatasourceFS(FirebaseFirestore.instance),
+          create: (context) => MockPostsDatasource(),
+          // create: (context) => FSPostsDatasource(FirebaseFirestore.instance),
         ),
       ],
       child: MultiRepositoryProvider(

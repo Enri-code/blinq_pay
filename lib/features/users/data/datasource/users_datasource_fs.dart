@@ -9,11 +9,11 @@ class FSGetUsersDatasourceParams extends UsersDatasourceParam {
   FSGetUsersDatasourceParams({this.lastDocId});
 }
 
-class UsersDatasourceFS extends UsersDatasource {
+class FSUsersDatasource extends UsersDatasource {
   final FirebaseFirestore firestore;
-  UsersDatasourceFS(this.firestore);
+  FSUsersDatasource(this.firestore);
 
-  ///[UsersDatasourceFS] must be a [FSGetUsersDatasourceParams]
+  ///[FSUsersDatasource] must be a [FSGetUsersDatasourceParams]
   @override
   Future<List<User>> getUsers({
     int page = 0,
