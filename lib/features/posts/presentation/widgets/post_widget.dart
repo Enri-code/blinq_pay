@@ -1,10 +1,11 @@
 import 'dart:math';
 
+import 'package:blinq_pay/core/theme/app_theme.dart';
 import 'package:blinq_pay/core/utils/helper_functions.dart';
 import 'package:blinq_pay/features/home/presentation/pages/photo_view_page.dart';
-import 'package:blinq_pay/features/home/presentation/widgets/video_player_widget.dart';
 import 'package:blinq_pay/features/posts/domain/models/post.dart';
 import 'package:blinq_pay/features/users/presentation/widgets/user_profile.dart';
+import 'package:blinq_pay/features/video_player/widgets/video_player_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class PostWidget extends StatelessWidget {
           6.verticalSpace,
           Text(
             post.description,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyMedium?.sp,
           ),
         ],
         if (!post.noMedia) ...[
@@ -77,20 +78,20 @@ class _PostHeader extends StatelessWidget {
                 children: [
                   Text(
                     post.user.name,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    style: Theme.of(context).textTheme.bodyMedium?.sp.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                   ),
                   Spacer(),
                   Text(
                     timeago.format(post.timestamp),
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium?.sp,
                   ),
                 ],
               ),
               Text(
                 '@${post.username}',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodySmall?.sp,
               ),
             ],
           ),

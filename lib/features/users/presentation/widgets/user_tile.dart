@@ -1,3 +1,4 @@
+import 'package:blinq_pay/core/theme/app_theme.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
 import 'package:blinq_pay/features/users/presentation/widgets/user_profile.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,13 @@ class UserTileWidget extends StatelessWidget {
           children: [
             Text(
               user.name,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              style: Theme.of(context).textTheme.bodyMedium?.sp.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
             ),
             Text(
               '@${user.username}',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.bodySmall?.sp,
             ),
           ],
         ),

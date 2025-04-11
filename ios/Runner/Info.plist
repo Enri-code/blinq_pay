@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Blinq Pay</string>
+	<string>BlinqPay</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -35,6 +35,8 @@
 	<key>NSAppTransportSecurity</key>  
 	<dict>  
 		<key>NSAllowsArbitraryLoads</key><true/>  
+		<key>NSAllowsArbitraryLoadsForMedia</key><true/>  
+		<key>NSAllowsLocalNetworking</key><true/>  
 	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

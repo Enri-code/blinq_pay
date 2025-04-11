@@ -1,3 +1,4 @@
+import 'package:blinq_pay/core/theme/app_theme.dart';
 import 'package:blinq_pay/core/utils/extensions/string.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
 import 'package:blinq_pay/features/users/presentation/widgets/user_profile.dart';
@@ -15,15 +16,15 @@ class UserStatusWidget extends StatelessWidget {
       child: Column(
         children: [
           CircleAvatar(
-            radius: 27.w,
-            child: UserProfileWidget(radius: 26.w, user: user),
+            radius: 26.h,
+            child: UserProfileWidget(radius: 25.h, user: user),
           ),
           4.verticalSpace,
           Text(
             user.name.firstName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall?.sp,
           ),
         ],
       ),

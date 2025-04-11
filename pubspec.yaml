@@ -51,6 +51,7 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   shimmer: ^3.0.0
   timeago: ^3.7.0
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:

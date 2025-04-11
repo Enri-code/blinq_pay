@@ -1,3 +1,4 @@
+import 'package:blinq_pay/core/theme/app_theme.dart';
 import 'package:blinq_pay/core/utils/extensions/data_state.dart';
 import 'package:blinq_pay/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:blinq_pay/features/posts/domain/models/post.dart';
@@ -134,7 +135,7 @@ class _ScrollBodyWidget extends StatelessWidget {
               child: Center(
                 child: Text(
                   state.dataState.error?.message ?? '',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyLarge?.sp,
                 ),
               ),
             );
@@ -145,7 +146,7 @@ class _ScrollBodyWidget extends StatelessWidget {
               child: Center(
                 child: Text(
                   'No posts found',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyLarge?.sp,
                 ),
               ),
             );

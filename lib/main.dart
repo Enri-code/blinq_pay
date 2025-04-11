@@ -9,14 +9,15 @@ import 'package:blinq_pay/features/users/data/datasource/users_datasource_mock.d
 import 'package:blinq_pay/features/users/data/repository/users_repository.dart';
 import 'package:blinq_pay/features/users/domain/datasource/users_datasource.dart';
 import 'package:blinq_pay/features/users/presentation/bloc/users_bloc/users_bloc.dart';
+import 'package:blinq_pay/features/video_player/bloc/video_manager_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => PostsBloc(context.read())),
             BlocProvider(create: (context) => UsersBloc(context.read())),
+            BlocProvider(create: (context) => VideoManagerBloc()),
           ],
           child: ScreenUtilInit(
             designSize: const Size(375, 812),
