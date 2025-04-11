@@ -33,8 +33,7 @@ class _UsersTabState extends State<UsersTab> {
       body: BlocBuilder<UsersBloc, UsersState>(
         builder: (context, state) {
           return CustomScrollView(
-            cacheExtent: 1000,
-            physics: state.dataState.isLoading
+            physics: state is UsersInitialState
                 ? const NeverScrollableScrollPhysics()
                 : const BouncingScrollPhysics(),
             slivers: [const _AppBarWidget(), const _ScrollBodyWidget()],
@@ -80,7 +79,7 @@ class _ScrollBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       sliver: BlocBuilder<UsersBloc, UsersState>(
         builder: (context, state) {
           if (state.dataState.isError) {
