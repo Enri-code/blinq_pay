@@ -10,7 +10,16 @@ class MockUsersDatasource extends UsersDatasource {
     required UsersDatasourceParam param,
   }) async {
     await Future.delayed(Duration(seconds: 2));
-    return [
-    ];
+    return List.generate(
+      15,
+      (index) => User(
+        userId: 'userId-$index',
+        username: 'username$index',
+        name: 'Full Name',
+        bio: 'bio',
+        photo:
+            'https://cdn.dribbble.com/users/14790058/avatars/normal/2283a992ab80bcd500f7b950ba865cf1.jpg?1699074419',
+      ),
+    );
   }
 }

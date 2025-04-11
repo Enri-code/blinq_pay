@@ -78,7 +78,7 @@ class _AppBarWidget extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 6.h),
                     itemBuilder: (context, index) {
-                      final user = state.data.data[index];
+                      final user = state.data.data.take(15).toList()[index];
                       return UserStatusWidget(user: user);
                     },
                     separatorBuilder: (context, index) {
