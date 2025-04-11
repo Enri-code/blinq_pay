@@ -3,6 +3,33 @@
 
 **BlinqPay** is a polished Flutter application that demonstrates fetching and displaying users and posts from Firebase Firestore. It leverages a clean architecture, responsive design, multimedia handling, and proper state management using **BLoC**.
 
+
+### NOTE: Mocked Datasources
+
+Currently, the data loaded into the app is coming from a mocked datasource. I had issues getting passed the permission problem from Firebase.
+
+The Firestore datasources can be uncommented to replace the current mocked datasources in [main.dart](lib/main.dart)
+
+```dart
+  return MultiRepositoryProvider(
+    providers: [
+      RepositoryProvider<UsersDatasource>(
+        create: (context) => MockUsersDatasource(),
+        // create: (context) => FSUsersDatasource(FirebaseFirestore.instance),
+      ),
+      RepositoryProvider<PostsDatasource>(
+        create: (context) => MockPostsDatasource(),
+        // create: (context) => FSPostsDatasource(FirebaseFirestore.instance),
+      ),
+    ],
+
+  ...
+```
+
+You can find the code for the actual Firestore datasource in:
+- [lib/features/posts/data/datasource/posts_datasource_fs.dart](lib/features/posts/data/datasource/posts_datasource_fs.dart) and 
+- [lib/features/users/data/datasource/users_datasource_fs.dart](lib/features/users/data/datasource/users_datasource_fs.dart)
+
 ---
 
 ## Features
@@ -25,6 +52,7 @@
 - dart run asset_generator:generate
 
 - dart run build_runner build
+
 
 ### Dependencies
 
