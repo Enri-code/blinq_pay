@@ -11,8 +11,8 @@ class UserTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        UserProfileWidget(user: user, radius: 20.r),
-        8.horizontalSpace,
+        UserProfileWidget(user: user, radius: 22.r),
+        12.horizontalSpace,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -6,6 +6,7 @@ import 'package:blinq_pay/features/posts/presentation/widgets/post_widget.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
 import 'package:blinq_pay/features/users/presentation/bloc/users_bloc/users_bloc.dart';
 import 'package:blinq_pay/features/users/presentation/widgets/user_status.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -150,19 +151,25 @@ class _ScrollBodyWidget extends StatelessWidget {
             );
           }
           if (state is FoundPostsState) {
-            return SliverList.separated(
+            return SliverList.builder(
               itemCount: state.data.data.length + 1,
               itemBuilder: (context, index) {
                 if (index == state.data.data.length) {
+                  context.read<PostsBloc>().add(GetMorePostsEvent());
                   return const SizedBox(
-                    height: 100,
-                    child: Center(child: CircularProgressIndicator()),
+                    height: 120,
+                    child: Align(
+                      alignment: Alignment(0, -.75),
+                      child: CupertinoActivityIndicator(),
+                    ),
                   );
                 }
                 final post = state.data.data[index];
-                return PostWidget(key: ValueKey(post.id), post: post);
+                return Padding(
+                  padding: EdgeInsets.only(top: 32.h),
+                  child: PostWidget(key: ValueKey(post.id), post: post),
+                );
               },
-              separatorBuilder: (context, index) => 32.verticalSpace,
             );
           }
           return SliverFillRemaining(

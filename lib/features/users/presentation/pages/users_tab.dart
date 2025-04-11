@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'package:flutter/cupertino.dart';
+
 class UsersTab extends StatefulWidget {
   const UsersTab({super.key});
 
@@ -103,19 +105,25 @@ class _ScrollBodyWidget extends StatelessWidget {
             );
           }
           if (state is FoundUsersState) {
-            return SliverList.separated(
+            return SliverList.builder(
               itemCount: state.data.data.length + 1,
               itemBuilder: (context, index) {
                 if (index == state.data.data.length) {
+                  context.read<UsersBloc>().add(GetMoreUsersEvent());
                   return const SizedBox(
-                    height: 100,
-                    child: Center(child: CircularProgressIndicator()),
+                    height: 120,
+                    child: Align(
+                      alignment: Alignment(0, -.75),
+                      child: CupertinoActivityIndicator(),
+                    ),
                   );
                 }
                 final user = state.data.data[index];
-                return UserTileWidget(user: user);
+                return Padding(
+                  padding: EdgeInsets.only(top: 32.h),
+                  child: UserTileWidget(user: user),
+                );
               },
-              separatorBuilder: (context, index) => 16.verticalSpace,
             );
           }
 
@@ -134,7 +142,7 @@ class _ScrollBodyWidget extends StatelessWidget {
                     photo: '',
                   );
                   return Padding(
-                    padding: EdgeInsets.only(bottom: 16.h),
+                    padding: EdgeInsets.only(bottom: 32.h),
                     child: UserTileWidget(user: user),
                   );
                 },

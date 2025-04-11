@@ -2,6 +2,7 @@ import 'package:blinq_pay/core/utils/data_helpers.dart';
 import 'package:blinq_pay/features/posts/data/datasource/posts_datasource_fs.dart';
 import 'package:blinq_pay/features/posts/data/repository/posts_repository.dart';
 import 'package:blinq_pay/features/posts/domain/models/post.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -65,6 +66,6 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
           dataState: DataState(status: Status.success),
         ));
       });
-    });
+    }, transformer: droppable());
   }
 }

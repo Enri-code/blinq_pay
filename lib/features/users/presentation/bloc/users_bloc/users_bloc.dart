@@ -4,6 +4,7 @@ import 'package:blinq_pay/features/users/data/repository/users_repository.dart';
 import 'package:blinq_pay/features/users/domain/models/user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 
 part 'users_event.dart';
 part 'users_state.dart';
@@ -65,6 +66,6 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
           dataState: DataState(status: Status.success),
         ));
       });
-    });
+    }, transformer: droppable());
   }
 }
