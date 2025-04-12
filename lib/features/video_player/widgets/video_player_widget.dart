@@ -4,7 +4,6 @@ import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
@@ -32,7 +31,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
-      aspectRatio: 1,
+      // aspectRatio: 1,
       autoPlay: true,
       autoInitialize: true,
       looping: true,

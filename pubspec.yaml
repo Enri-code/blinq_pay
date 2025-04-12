@@ -41,7 +41,9 @@ dependencies:
 
   animated_theme_switcher: ^2.0.10
   bounce: ^1.0.2
-  chewie: ^1.11.1   
+  # chewie: ^1.11.1
+  chewie:
+    path: packages/chewie-1.11.1
   cached_network_image: ^3.4.1
   flutter_svg: ^2.0.17
   flutter_screenutil: ^5.9.3
