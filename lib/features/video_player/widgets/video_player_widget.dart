@@ -32,10 +32,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
       // aspectRatio: 1,
-      autoPlay: true,
+      // autoPlay: true,
       autoInitialize: true,
       looping: true,
       showOptions: false,
+      pauseOnBackgroundTap: true,
+      allowedScreenSleep: false,
       playbackSpeeds: const [0.25, 0.5, 1, 1.5, 2, 3],
     );
   }
